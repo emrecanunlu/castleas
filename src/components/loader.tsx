@@ -20,15 +20,15 @@ export function Loader({ children }: LoaderProps) {
 
     const shell = document.getElementById("loader-shell");
     if (!shell) {
-      handleComplete();
-      return;
+      const fallbackTimer = window.setTimeout(handleComplete, 0);
+      return () => window.clearTimeout(fallbackTimer);
     }
 
     const prefersReducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)",
     ).matches;
 
-    let hideTimer: ReturnType<typeof setTimeout> | undefined;
+    let hideTimer: number | undefined;
 
     const exitTimer = window.setTimeout(() => {
       shell.classList.add(
