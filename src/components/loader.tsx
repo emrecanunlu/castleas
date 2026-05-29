@@ -28,22 +28,23 @@ export function Loader({ children }: LoaderProps) {
       "(prefers-reduced-motion: reduce)",
     ).matches;
 
-    let hideTimer: number | undefined;
+    let cancelled = false;
 
     const exitTimer = window.setTimeout(() => {
+      if (cancelled) return;
+
       shell.classList.add(
         prefersReducedMotion ? "loader-shell-exit-fade" : "loader-shell-exit",
       );
 
-      hideTimer = window.setTimeout(
-        handleComplete,
-        prefersReducedMotion ? 200 : EXIT_DURATION_MS,
-      );
+      window.setTimeout(() => {
+        if (!cancelled) handleComplete();
+      }, prefersReducedMotion ? 200 : EXIT_DURATION_MS);
     }, MIN_DISPLAY_MS);
 
     return () => {
+      cancelled = true;
       window.clearTimeout(exitTimer);
-      if (hideTimer) window.clearTimeout(hideTimer);
       document.body.style.overflow = "";
     };
   }, [ready, handleComplete]);
