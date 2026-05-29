@@ -45,9 +45,72 @@ body {
   font-family: var(--font-josefin), system-ui, sans-serif;
 }
 
+body:not(.loader-ready) {
+  overflow: hidden;
+}
+
+html.loader-ready #loader-shell {
+  display: none;
+}
+
+@keyframes loader-shell-progress {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes loader-shell-bar {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.loader-shell-progress {
+  animation: loader-shell-progress 2.4s linear forwards;
+}
+
+.loader-shell-bar {
+  animation: loader-shell-bar 2s cubic-bezier(0.22, 1, 0.36, 1) 0.35s forwards;
+}
+
+#loader-shell.loader-shell-exit {
+  animation: loader-shell-slide-out 0.9s cubic-bezier(0.76, 0, 0.24, 1) forwards;
+}
+
+#loader-shell.loader-shell-exit-fade {
+  animation: loader-shell-fade-out 0.2s ease forwards;
+}
+
+@keyframes loader-shell-slide-out {
+  to {
+    transform: translateY(-100%);
+  }
+}
+
+@keyframes loader-shell-fade-out {
+  to {
+    opacity: 0;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+
+  .loader-shell-progress,
+  .loader-shell-bar {
+    animation-duration: 0.3s !important;
+  }
+
+  #loader-shell.loader-shell-exit {
+    animation-duration: 0.2s !important;
   }
 
   ::view-transition-group(*),

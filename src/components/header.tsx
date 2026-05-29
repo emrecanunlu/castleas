@@ -13,26 +13,25 @@ export function Header() {
   const pathname = usePathname();
   const isHome = pathname === "/";
   const [open, setOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
+  const [scrollY, setScrollY] = useState(0);
 
   useEffect(() => {
     setOpen(false);
+  }, [pathname]);
 
-    if (!isHome) {
-      setScrolled(true);
-      return;
-    }
+  useEffect(() => {
+    if (!isHome) return;
 
-    const onScroll = () => setScrolled(window.scrollY > 8);
+    const onScroll = () => setScrollY(window.scrollY);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, [isHome, pathname]);
+  }, [isHome]);
 
   const isActive = (href: string) =>
     href === "/" ? pathname === "/" : pathname.startsWith(href);
 
-  const isSolid = !isHome || scrolled || open;
+  const isSolid = !isHome || scrollY > 8 || open;
 
   return (
     <header

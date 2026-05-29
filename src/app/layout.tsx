@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Cinzel, Josefin_Sans } from "next/font/google";
-import { SplashLoader } from "@/components/splash-loader";
+import { Loader } from "@/components/loader";
+import { LoaderShell } from "@/components/loader-shell";
 import "./globals.css";
 
 const cinzel = Cinzel({
@@ -37,11 +38,12 @@ export default function RootLayout({
   return (
     <html
       lang="tr"
+      data-scroll-behavior="smooth"
       className={`${cinzel.variable} ${josefin.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-        <SplashLoader />
-        {children}
+        <LoaderShell />
+        <Loader>{children}</Loader>
       </body>
     </html>
   );

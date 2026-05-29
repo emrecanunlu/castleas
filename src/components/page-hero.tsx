@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 
 type PageHeroProps = {
   eyebrow: string;
@@ -9,13 +9,15 @@ type PageHeroProps = {
 };
 
 export function PageHero({ eyebrow, title, description }: PageHeroProps) {
+  const prefersReducedMotion = useReducedMotion();
+
   return (
     <section className="border-b border-border bg-card pt-28 pb-16 lg:pt-32 lg:pb-20">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: prefersReducedMotion ? 0 : 0.5 }}
           className="max-w-3xl"
         >
           <p className="font-display text-sm tracking-[0.3em] text-accent uppercase">

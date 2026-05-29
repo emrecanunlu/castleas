@@ -49,8 +49,8 @@ export function About() {
           <p className="text-lg leading-relaxed text-muted-foreground">
             Castle Mimarlık & İnşaat & Peyzaj, konut ve ticari projelerde
             estetik tasarımı sağlam mühendislikle buluşturur. Her projede
-            sürdürülebilir malzeme, iş güvenliği ve müşteri memnuniyetini öncelik
-            kabul ederiz.
+            sürdürülebilir malzeme, iş güvenliği ve müşteri memnuniyetini
+            öncelik kabul ederiz.
           </p>
 
           <ul className="mt-8 space-y-4">

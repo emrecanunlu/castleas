@@ -11,10 +11,7 @@ export function Testimonials() {
         <div className="mb-16 flex justify-center">
           <div className="inline-flex items-center gap-1">
             {Array.from({ length: 5 }).map((_, i) => (
-              <Star
-                key={i}
-                className="h-5 w-5 fill-accent text-accent"
-              />
+              <Star key={i} className="h-5 w-5 fill-accent text-accent" />
             ))}
             <span className="ml-2 text-muted-foreground">
               {company.rating} · {company.reviewCount} değerlendirme
